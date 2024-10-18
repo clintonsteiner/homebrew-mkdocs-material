@@ -72,11 +72,6 @@ class MkdocsMaterial < Formula
     sha256 "162b3d129c7fad9b19abfdcb9c1458a651628e4b1dea628ac68790fb3061c60c"
   end
 
-  resource "mkdocs-material" do
-    url "https://files.pythonhosted.org/packages/ab/56/c58fe932fe0b3e70b065f1ce5759672c81ae91d00b720023ab8cd580b7a8/mkdocs_material-9.5.41.tar.gz"
-    sha256 "30fa5d459b4b8130848ecd8e1c908878345d9d8268f7ddbc31eebe88d462d97b"
-  end
-
   resource "mkdocs-material-extensions" do
     url "https://files.pythonhosted.org/packages/79/9b/9b4c96d6593b2a541e1cb8b34899a6d021d208bb357042823d4d2cabdbe7/mkdocs_material_extensions-1.3.1.tar.gz"
     sha256 "10c9511cea88f568257f960358a467d12b970e1f7b2c0e5fb2bb48cab1928443"
