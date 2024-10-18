@@ -1,4 +1,5 @@
 class MkdocsMaterial < Formula
+  include Language::Python::Virtualenv
   desc "Material Design theme for MkDocs"
   homepage "https://squidfunk.github.io/mkdocs-material/"
   url "https://github.com/squidfunk/mkdocs-material/archive/refs/tags/9.5.41.tar.gz"
@@ -121,7 +122,7 @@ class MkdocsMaterial < Formula
     sha256 "d584d9ec91ad65861cc08d42e834324ef890a082e591037abe114850ff7bbc3e"
   end
 
-  resource "pyyaml_env_tag" do
+  resource "pyyaml-env-tag" do
     url "https://files.pythonhosted.org/packages/fb/8e/da1c6c58f751b70f8ceb1eb25bc25d524e8f14fe16edcce3f4e3ba08629c/pyyaml_env_tag-0.1.tar.gz"
     sha256 "70092675bda14fdec33b31ba77e7543de9ddc88f2e5b99160396572d11525bdb"
   end
@@ -151,10 +152,8 @@ class MkdocsMaterial < Formula
     sha256 "108f42a7f0345042a854d4d0ad0834b741d421330d5f575b81cb27b883500176"
   end
 
-  include Language::Python::Virtualenv
-
   def install
-    virtualenv_install_with_resources(:using => "python@3")
+    virtualenv_install_with_resources(:using: "python@3")
   end
 
   test do
@@ -162,5 +161,5 @@ class MkdocsMaterial < Formula
     Language::Python.each_python(build) do |python, _|
       system python, "-c", "import material"
     end
-end
+  end
 end
