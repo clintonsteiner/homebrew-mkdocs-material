@@ -5,7 +5,8 @@ class MkdocsMaterial < Formula
   url "https://github.com/squidfunk/mkdocs-material/archive/refs/tags/9.5.41.tar.gz"
   sha256 "c15129c3f46e60da0651206ce7934c2972b45933d1828583f36ca1fdced7a1a2"
   license "MIT"
-  depends_on "python@3"
+  depends_on "python@3.13"
+  depends_on "mkdocs"
 
   resource "babel" do
     url "https://files.pythonhosted.org/packages/2a/74/f1bc80f23eeba13393b7222b11d95ca3af2c1e28edca18af487137eefed9/babel-2.16.0.tar.gz"
@@ -60,11 +61,6 @@ class MkdocsMaterial < Formula
   resource "mergedeep" do
     url "https://files.pythonhosted.org/packages/3a/41/580bb4006e3ed0361b8151a01d324fb03f420815446c7def45d02f74c270/mergedeep-1.3.4.tar.gz"
     sha256 "0096d52e9dad9939c3d975a774666af186eda617e6ca84df4c94dec30004f2a8"
-  end
-
-  resource "mkdocs" do
-    url "https://files.pythonhosted.org/packages/bc/c6/bbd4f061bd16b378247f12953ffcb04786a618ce5e904b8c5a01a0309061/mkdocs-1.6.1.tar.gz"
-    sha256 "7b432f01d928c084353ab39c57282f29f92136665bdd6abf7c1ec8d822ef86f2"
   end
 
   resource "mkdocs-get-deps" do
