@@ -164,6 +164,6 @@ class MkdocsMaterial < Formula
 
       And some deeply meaningful prose.
     EOS
-    system bin/"mkdocs", "build", "--clean"
+    system "mkdocs", "build", "--clean"
   end
 end
