@@ -5,6 +5,8 @@ class MkdocsMaterial < Formula
   url "https://github.com/squidfunk/mkdocs-material/archive/refs/tags/9.5.41.tar.gz"
   sha256 "c15129c3f46e60da0651206ce7934c2972b45933d1828583f36ca1fdced7a1a2"
   license "MIT"
+
+  depends_on "libyaml"
   depends_on "mkdocs"
   depends_on "python@3.13"
 
@@ -144,13 +146,24 @@ class MkdocsMaterial < Formula
   end
 
   def install
-    virtualenv_install_with_resources(using: "python@3")
+    ENV["PIP_USE_PEP517"] = "1"
+    virtualenv_install_with_resources
   end
 
   test do
-    ENV["PYTHONDONTWRITEBYTECODE"] = "1"
-    Language::Python.each_python(build) do |python, _|
-      system python, "-c", "import material"
-    end
+    # build a very simple site that uses the "readthedocs" theme.
+    (testpath/"mkdocs.yml").write <<~EOS
+      site_name: MkLorum
+      nav:
+        - Home: index.md
+      theme: material
+    EOS
+    mkdir testpath/"docs"
+    (testpath/"docs/index.md").write <<~EOS
+      # A heading
+
+      And some deeply meaningful prose.
+    EOS
+    system bin/"mkdocs", "build", "--clean"
   end
 end
