@@ -149,7 +149,7 @@ class MkdocsMaterial < Formula
     venv = virtualenv_create(libexec, "python3")
     venv.pip_install resources
     venv.pip_install_and_link buildpath
-    bin.install_symlink libexec/"bin/mkdocs"
+    (bin/"mkdocs-material").write_env_script libexec/"bin/mkdocs", PYTHONPATH: ENV["PYTHONPATH"]
   end
 
   test do
@@ -166,6 +166,6 @@ class MkdocsMaterial < Formula
 
       And some deeply meaningful prose.
     EOS
-    system "#{bin}/mkdocs", "build", "--clean"
+    system "#{Formula["mkdocs"].opt_bin}/mkdocs", "build", "--clean"
   end
 end
