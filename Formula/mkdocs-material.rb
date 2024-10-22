@@ -146,8 +146,10 @@ class MkdocsMaterial < Formula
   end
 
   def install
-    ENV["PIP_USE_PEP517"] = "1"
-    virtualenv_install_with_resources
+    venv = virtualenv_create(libexec, "python3")
+    venv.pip_install resources
+    venv.pip_install_and_link buildpath
+    bin.install_symlink libexec/"bin/mkdocs"
   end
 
   test do
@@ -164,6 +166,6 @@ class MkdocsMaterial < Formula
 
       And some deeply meaningful prose.
     EOS
-    system "mkdocs", "build", "--clean"
+    system "#{bin}/mkdocs", "build", "--clean"
   end
 end
