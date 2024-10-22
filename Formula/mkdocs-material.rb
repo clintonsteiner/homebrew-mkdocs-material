@@ -146,10 +146,8 @@ class MkdocsMaterial < Formula
   end
 
   def install
-    venv = virtualenv_create(libexec, "python3")
-    venv.pip_install resources
-    venv.pip_install_and_link buildpath
-    (bin/"mkdocs-material").write_env_script libexec/"bin/mkdocs", PYTHONPATH: ENV["PYTHONPATH"]
+    mkdocs_venv = Formula["mkdocs"].opt_libexec
+    system "#{mkdocs_venv}/bin/pip", "install", "mkdocs-material"
   end
 
   test do
