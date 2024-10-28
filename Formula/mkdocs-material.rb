@@ -9,6 +9,8 @@ class MkdocsMaterial < Formula
   depends_on "libyaml"
   depends_on "python@3.13"
 
+  conflicts_with "mkdocs-material", because: "both install `mkdocs` binaries"
+
   resource "mkdocs" do
     url "https://files.pythonhosted.org/packages/bc/c6/bbd4f061bd16b378247f12953ffcb04786a618ce5e904b8c5a01a0309061/mkdocs-1.6.1.tar.gz"
     sha256 "7b432f01d928c084353ab39c57282f29f92136665bdd6abf7c1ec8d822ef86f2"
