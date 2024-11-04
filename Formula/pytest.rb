@@ -1,7 +1,7 @@
 class Pytest < Formula
   include Language::Python::Virtualenv
 
-  desc "pytest: simple powerful testing with Python"
+  desc "Simple powerful testing with Python"
   homepage "https://docs.pytest.org/en/latest/"
   url "https://files.pythonhosted.org/packages/8b/6c/62bbd536103af674e227c41a8f3dcd022d591f6eed5facb5a0f31ee33bbc/pytest-8.3.3.tar.gz"
   sha256 "70b98107bd648308a7952b06e6ca9a50bc660be218d53c257cc1fc94fda10181"
@@ -24,7 +24,6 @@ class Pytest < Formula
   end
 
   def install
-    #virtualenv_create(libexec, "python3")
     virtualenv_install_with_resources
   end
 
