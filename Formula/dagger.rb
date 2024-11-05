@@ -26,12 +26,6 @@ class Dagger < Formula
   depends_on "python@3.13" => :build
   depends_on "docker" => :test
 
-  #resource "dagger-python-sdk" do
-  #  url "https://github.com/dagger/dagger.git",
-  #      tag:      "sdk/python/v0.13.5",
-  #      revision: "dc83928c3a13d6b315bf0953befde001ec359238"
-  #end
-
   def install
     ldflags = %W[
       -s -w
@@ -53,6 +47,6 @@ class Dagger < Formula
 
     output = shell_output("#{bin}/dagger query brewtest 2>&1", 1)
     assert_match "Cannot connect to the Docker daemon", output
-    system libexec/"bin/python3", "-c", "import dagger"
+    system "python3", "-c", "import dagger"
   end
 end
