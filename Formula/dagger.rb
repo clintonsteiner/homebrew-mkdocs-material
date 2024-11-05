@@ -1,4 +1,5 @@
 class Dagger < Formula
+  include Language::Python::Virtualenv
   desc "Portable devkit for CI/CD pipelines"
   homepage "https://dagger.io"
   url "https://github.com/dagger/dagger.git",
@@ -22,7 +23,14 @@ class Dagger < Formula
   end
 
   depends_on "go" => :build
+  depends_on "python@3.13" => :build
   depends_on "docker" => :test
+
+  resource "dagger-python-sdk" do
+    url "https://github.com/dagger/dagger.git",
+        tag:      "sdk/python/v0.13.5",
+        revision: "dc83928c3a13d6b315bf0953befde001ec359238"
+  end
 
   def install
     ldflags = %W[
@@ -31,13 +39,10 @@ class Dagger < Formula
       -X github.com/dagger/dagger/engine.Tag=v#{version}
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/dagger"
-
-    resource "dagger-python-sdk" do
-      url "https://github.com/dagger/dagger-python-sdk/archive/v13.5.tar.gz" # Replace with SDK version
-      sha256 "python_sdk_sha256_hash"
-    end
+	
+	venv = virtualenv_create(libexec, "python3")
     resource("dagger-python-sdk").stage do
-      system "python3", *Language::Python.setup_install_args(prefix)
+	  system "bash ./install.sh"
     end
 
     generate_completions_from_executable(bin/"dagger", "completion")
