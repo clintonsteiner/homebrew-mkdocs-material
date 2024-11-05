@@ -26,11 +26,11 @@ class Dagger < Formula
   depends_on "python@3.13" => :build
   depends_on "docker" => :test
 
-  resource "dagger-python-sdk" do
-    url "https://github.com/dagger/dagger.git",
-        tag:      "sdk/python/v0.13.5",
-        revision: "dc83928c3a13d6b315bf0953befde001ec359238"
-  end
+  #resource "dagger-python-sdk" do
+  #  url "https://github.com/dagger/dagger.git",
+  #      tag:      "sdk/python/v0.13.5",
+  #      revision: "dc83928c3a13d6b315bf0953befde001ec359238"
+  #end
 
   def install
     ldflags = %W[
@@ -40,10 +40,8 @@ class Dagger < Formula
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/dagger"
 	
-	venv = virtualenv_create(libexec, "python3")
-    resource("dagger-python-sdk").stage do
-	  system "bash ./install.sh"
-    end
+    system "python3", "-m", "pip", "install", *std_pip_args(prefix: libexec/"dagger", build_isolation: true), "./sdk/python/."
+    ENV.append "PYTHONPATH", libexec/"dagger"/Language::Python.site_packages("python3")
 
     generate_completions_from_executable(bin/"dagger", "completion")
   end
@@ -55,6 +53,6 @@ class Dagger < Formula
 
     output = shell_output("#{bin}/dagger query brewtest 2>&1", 1)
     assert_match "Cannot connect to the Docker daemon", output
-	system "python3", "-c", "import dagger"
+    system libexec/"bin/python3", "-c", "import dagger"
   end
 end
