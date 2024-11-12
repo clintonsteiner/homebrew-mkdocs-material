@@ -6,7 +6,7 @@ class DaggerIo < Formula
   url "https://files.pythonhosted.org/packages/a3/6b/59487e1a92e07ffd8cbcb9c9776ab8583c87832fbb331062fcc7fcbc109c/dagger_io-0.14.0.tar.gz"
   sha256 "4e1108a09421d8d56711a15f8d61cbd234f6ccb2367b1c1df2dd44f902aae678"
   license "Apache-2.0"
-  depends_on "python@3"
+  depends_on "python@3.13"
 
   resource "anyio" do
     url "https://files.pythonhosted.org/packages/9f/09/45b9b7a6d4e45c6bcb5bf61d19e3ab87df68e0601fa8c5293de3542546cc/anyio-4.6.2.post1.tar.gz"
@@ -194,7 +194,7 @@ class DaggerIo < Formula
   end
 
   def install
-    virtualenv_install_with_resources(using: "python@3")
+    virtualenv_install_with_resources(using: "python@3.13")
   end
 
   test do
