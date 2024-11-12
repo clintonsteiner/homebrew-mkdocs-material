@@ -5,7 +5,7 @@ class DaggerIo < Formula
   homepage "https://github.com/dagger/dagger/tree/main/sdk/python"
   url "https://files.pythonhosted.org/packages/a3/6b/59487e1a92e07ffd8cbcb9c9776ab8583c87832fbb331062fcc7fcbc109c/dagger_io-0.14.0.tar.gz"
   sha256 "4e1108a09421d8d56711a15f8d61cbd234f6ccb2367b1c1df2dd44f902aae678"
-  license: "Apache"
+  license "Apache"
   depends_on "python@3"
 
   resource "anyio" do
